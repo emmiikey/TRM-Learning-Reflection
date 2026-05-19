@@ -1,0 +1,7 @@
+datasets
+smolagents==1.18.0
+langchain-community
+langchain-core
+rank_bm25
+duckduckgo-search
+gradio
