@@ -5,3 +5,4 @@ langchain-core
 rank_bm25
 duckduckgo-search
 gradio
+huggingface_hub

@@ -5,7 +5,7 @@ from huggingface_hub import list_models
 
 
 # Initialize the DuckDuckGo search tool
-#search_tool = DuckDuckGoSearchTool()
+search_tool = DuckDuckGoSearchTool()
 
 
 class WeatherInfoTool(Tool):
@@ -20,15 +20,14 @@ class WeatherInfoTool(Tool):
     output_type = "string"
 
     def forward(self, location: str):
-        # Dummy weather data
         weather_conditions = [
             {"condition": "Rainy", "temp_c": 15},
             {"condition": "Clear", "temp_c": 25},
             {"condition": "Windy", "temp_c": 20}
         ]
-        # Randomly select a weather condition
         data = random.choice(weather_conditions)
         return f"Weather in {location}: {data['condition']}, {data['temp_c']}°C"
+
 
 class HubStatsTool(Tool):
     name = "hub_stats"
@@ -43,9 +42,8 @@ class HubStatsTool(Tool):
 
     def forward(self, author: str):
         try:
-            # List models from the specified author, sorted by downloads
-            models = list(list_models(author=author, sort="downloads", direction=-1, limit=1))
-            
+            models = list(list_models(author=author, sort="downloads", limit=1))
+
             if models:
                 model = models[0]
                 return f"The most downloaded model by {author} is {model.id} with {model.downloads:,} downloads."
@@ -54,3 +52,17 @@ class HubStatsTool(Tool):
         except Exception as e:
             return f"Error fetching models for {author}: {str(e)}"
 
+
+# Initialize custom tools
+weather_info_tool = WeatherInfoTool()
+hub_stats_tool = HubStatsTool()
+
+
+if __name__ == "__main__":
+    try:
+        print(search_tool("President of France"))
+    except Exception as e:
+        print(f"Search tool test failed: {e}")
+
+    print(weather_info_tool("Paris"))
+    print(hub_stats_tool("facebook"))
