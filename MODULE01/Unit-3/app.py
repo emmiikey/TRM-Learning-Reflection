@@ -12,15 +12,17 @@ model = InferenceClientModel()
 alfred = CodeAgent(
     tools=[
         guest_info_tool,
-        search_tool,
         weather_info_tool,
-        hub_stats_tool
+        hub_stats_tool,
+        search_tool
     ],
-    model=model
+    model=model,
+    add_base_tools=True,
+    planning_interval=3
 )
 
 # Example query
-response = alfred.run("What is the weather in Paris and what is Facebook's most downloaded Hugging Face model?")
+response = alfred.run("I need to speak with Dr. Nikola Tesla from the guest list. Can you help me prepare for this conversation?")
 
 print("Alfred's Response:")
 print(response)
