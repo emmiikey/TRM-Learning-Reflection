@@ -1,0 +1,10 @@
+# enviroment files
+.env
+*.jpg
+*.png
+*.mp3
+*.xlsx
+f918266a-b3e0-4914-865d-4faa564f1aef.py
+
+# pycache
+__pycache__/
